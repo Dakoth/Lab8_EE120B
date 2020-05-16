@@ -25,13 +25,10 @@ int main(void) {
 	DDRD = 0xFF; PORTD = 0x00;
 
 	//unsigned char tmpC = 0x00;
-	//unsigned char tmpD = 0x00; 
+	unsigned char tmpD = 0x00; 
 
 	unsigned short my_short = 0; //10 bit input from ADC
-	//unsigned char my_char = 0;
-
-	unsigned short MAX = 0x0110000111; //max value observed from phone flashlight 
-
+	unsigned char my_char = 0;
 	//have to call this 
 	ADC_init();
     /* Insert your solution below */
@@ -39,18 +36,12 @@ int main(void) {
 	    //PORTA = ~PINA;
 	    //Calculations 
 	    my_short = ADC; //10 bits to 8 bits 
-	   // my_char = (char)my_short; //now 8 lower bits
-	    //tmpD = (char)(my_short >> 8); //Should be 2 upper bits
+	    my_char = (char)my_short; //now 8 lower bits
+	    tmpD = (char)(my_short >> 8); //Should be 2 upper bits
 
-	    if (my_short >= MAX) {
-		   PORTB = 1;
-	    }
-	    else {
-		    PORTB = 0;
-	    } 
 	    //Setting output 
-	    //PORTB = my_char;
-	    //PORTD = tmpD;
+	    PORTB = my_char;
+	    PORTD = tmpD;
     }
     return 1;
 }
